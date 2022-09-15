@@ -1,0 +1,55 @@
+def add_movies(movies):
+    title = input("Enter the movie title: ")
+    director = input("Enter the director's name: ")
+    year = input("Enter the movie's release year: ")
+    movies.append({
+        'title': title,
+        'director': director,
+        'year': year
+    })
+
+    return movies
+
+
+def user_menu():
+    menu_prompt = "\nEnter 'a' to add a movie, 'l' to see your movies, 'f' to find a movie by title, or 'q' to quit: "
+    movies = []
+    selection = input(menu_prompt)
+    while selection != 'q':
+        # add movies into the movie list
+        if selection == 'a':
+            movies = add_movies(movies)
+
+        # see all your movies in your list
+        elif selection == 'l':
+            if len(movies) == 0:
+                print('We do not have any movies.')
+            else:
+                for movie in movies:
+                    print(f"The movie name is {movie['title']} and is directed by {movie['director']} and released "
+                          f"in {str(movie['year'])}")
+
+        # find whether movie in your list
+        elif selection == 'f':
+            user_movie = input("Enter your movie title: ")
+            counter = 0
+            for movie in movies:
+                if movie['title'] == user_movie:
+                    print(f"The movie name is {movie['title']} and is directed by {movie['director']} and released "
+                          f"in {str(movie['year'])}")
+                else:
+                    counter += 1
+                    continue
+            if counter == len(movies):
+                print("We do not have your movie")
+            else:
+                pass
+        else:
+            print("Unknown Command. Please try again.")
+
+        selection = input(menu_prompt)
+
+    return movies
+
+
+print(user_menu())
